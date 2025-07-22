@@ -3,24 +3,20 @@ import yfinance as yf
 
 app = Flask(__name__)
 
-# Login page route
+# Login route
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        print ("Inside Login")
         username = request.form.get('username')
         password = request.form.get('password')
-        # Add your login validation here (simple example)
+        # Simple check
         if username == "admin" and password == "password":
-            print ("Checking Username and password")
             return redirect(url_for('dashboard'))
         else:
-            print ("Login failed Invalid User")
             return render_template('front.html', error="Invalid credentials")
-    print ("If condition didnot Hit hence returing the front.html")
     return render_template('front.html')
 
-# Dashboard (stock fetcher) route
+# Dashboard route
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     stock_data = None
@@ -42,6 +38,15 @@ def dashboard():
 
     return render_template('index.html', stock_data=stock_data, error=error)
 
+# Signup route
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        print(f"New user signup: {username}")
+        return redirect(url_for('login'))
+    return render_template('signup.html')
+
 if __name__ == '__main__':
-    print ("App starts");
     app.run(debug=True)

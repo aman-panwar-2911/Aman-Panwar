@@ -1,28 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <title>Sign Up - Stock-Trends</title>
-    <link rel="stylesheet" href="front.css" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
-    <div class="container">
-        <h1 class="logo">stock-trends</h1>
-        <h2>Create a New Account</h2>
-
-        <form action="/signup" method="POST">
-            <label for="new-username">Username:</label>
-            <input type="text" id="new-username" name="username" required />
-
-            <label for="new-password">Password:</label>
-            <input type="password" id="new-password" name="password" required />
-
-            <button type="submit">Sign Up</button>
-        </form>
-
-        <p class="signup-text">Already have an account? <a href="front.html">Log in</a></p>
-    </div>
-
+    <h1>Sign Up</h1>
+    <form method="POST" action="{{ url_for('signup') }}">
+        <input type="text" name="username" placeholder="Choose a username" required><br>
+        <input type="password" name="password" placeholder="Choose a password" required><br>
+        <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
 </body>
 </html>
